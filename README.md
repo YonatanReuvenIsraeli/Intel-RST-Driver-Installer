@@ -10,8 +10,8 @@ Integrates Intel RST driver for Windows setup.
 **Streamlines installation process:** Avoids the need to manually load drivers during setup, ensuring a smoother experience.
 
 ## Common scenarios:
-Installing Windows on a system with NVMe drives
-Utilizing Intel Optane Memory
-Configuring RAID storage
-Resolving "missing storage driver" errors during setup
-Essential for optimal storage performance and compatibility.
+Installing Windows on a system with NVMe drives.   
+Utilizing Intel Optane Memory.  
+Configuring RAID storage.  
+Resolving "missing storage driver" errors during setup.  
+Essential for optimal storage performance and compatibility.  

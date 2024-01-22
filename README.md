@@ -1,5 +1,5 @@
 # Intel-RST-Driver-Installer
-## Integrates Intel RST driver for Windows setup.
+## Integrates Intel RST driver for Windows setup:
 Ensures seamless storage detection and optimization during Windows installation.
 
 ## Key benefits:

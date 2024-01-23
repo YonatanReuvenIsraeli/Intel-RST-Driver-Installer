@@ -13,3 +13,5 @@ Utilizing Intel Optane Memory.
 Configuring RAID storage.  
 Resolving "missing storage driver" errors during setup.  
 Essential for optimal storage performance and compatibility.  
+## Note:
+Environment variables cannot be entered into the input in the batch file because the batch file takes the text in the input literally.

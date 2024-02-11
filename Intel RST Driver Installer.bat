@@ -28,6 +28,7 @@ goto :PathWindows
 :PathWindows
 echo.
 set /p Path="What is the path to your downloaded Intel RST driver? "
+echo.
 set /p Windows="What is the drive letter of your Windows installation media? (A:-Z:) "
 if /i "%Windows%"=="A:" goto :Done
 if /i "%Windows%"=="B:" goto :Done

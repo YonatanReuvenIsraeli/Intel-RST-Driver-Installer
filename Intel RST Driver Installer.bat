@@ -15,14 +15,17 @@ goto :Start
 
 :Driver1
 echo.
-echo Please download the following driver from here then press any key to continue. https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
+echo Please download the following driver the following website. Press any key to open the website.
+pause
 start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 pause
 goto :PathWindows
 
 :Driver2
 echo.
-echo Please download the following driver from here then press any key to continue. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
+echo Please download the following driver the following website. Press any key to open the website.
+pause
+start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
 pause
 goto :PathWindows
 

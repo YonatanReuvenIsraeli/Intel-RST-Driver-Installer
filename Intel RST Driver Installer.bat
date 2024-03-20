@@ -8,10 +8,10 @@ echo.
 echo [1] RAID or Intel Optane Memory H Series
 echo [2] Intel Optane Memory M Series
 set /p Driver="Which of the following do you need? (1/2) "
-if "%Driver%"=="1" goto :Driver1
-if "%Driver%"=="2" goto :Driver2
+if "%Driver%"=="1" goto Driver1
+if "%Driver%"=="2" goto Driver2
 echo Invalid Syntax!
-goto :Start
+goto Start
 
 :Driver1
 echo.
@@ -21,7 +21,7 @@ start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storag
 echo https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 echo.
 pause >nul
-goto :PathWindows
+goto PathWindows
 
 :Driver2
 echo.
@@ -31,45 +31,45 @@ start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage
 echo https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
 echo.
 pause >nul
-goto :PathWindows
+goto PathWindows
 
 :PathWindows
 echo.
 set /p Path="What is the path to your downloaded Intel RST driver? "
 echo.
 set /p Windows="What is the drive letter of your Windows installation media? (A:-Z:) "
-if /i "%Windows%"=="A:" goto :Done
-if /i "%Windows%"=="B:" goto :Done
-if /i "%Windows%"=="C:" goto :Done
-if /i "%Windows%"=="D:" goto :Done
-if /i "%Windows%"=="E:" goto :Done
-if /i "%Windows%"=="F:" goto :Done
-if /i "%Windows%"=="G:" goto :Done
-if /i "%Windows%"=="H:" goto :Done
-if /i "%Windows%"=="I:" goto :Done
-if /i "%Windows%"=="J:" goto :Done
-if /i "%Windows%"=="K:" goto :Done
-if /i "%Windows%"=="L:" goto :Done
-if /i "%Windows%"=="M:" goto :Done
-if /i "%Windows%"=="N:" goto :Done
-if /i "%Windows%"=="O:" goto :Done
-if /i "%Windows%"=="P:" goto :Done
-if /i "%Windows%"=="Q:" goto :Done
-if /i "%Windows%"=="R:" goto :Done
-if /i "%Windows%"=="S:" goto :Done
-if /i "%Windows%"=="T:" goto :Done
-if /i "%Windows%"=="U:" goto :Done
-if /i "%Windows%"=="V:" goto :Done
-if /i "%Windows%"=="W:" goto :Done
-if /i "%Windows%"=="X:" goto :Done
-if /i "%Windows%"=="Y:" goto :Done
-if /i "%Windows%"=="Z:" goto :Done
+if /i "%Windows%"=="A:" goto Done
+if /i "%Windows%"=="B:" goto Done
+if /i "%Windows%"=="C:" goto Done
+if /i "%Windows%"=="D:" goto Done
+if /i "%Windows%"=="E:" goto Done
+if /i "%Windows%"=="F:" goto Done
+if /i "%Windows%"=="G:" goto Done
+if /i "%Windows%"=="H:" goto Done
+if /i "%Windows%"=="I:" goto Done
+if /i "%Windows%"=="J:" goto Done
+if /i "%Windows%"=="K:" goto Done
+if /i "%Windows%"=="L:" goto Done
+if /i "%Windows%"=="M:" goto Done
+if /i "%Windows%"=="N:" goto Done
+if /i "%Windows%"=="O:" goto Done
+if /i "%Windows%"=="P:" goto Done
+if /i "%Windows%"=="Q:" goto Done
+if /i "%Windows%"=="R:" goto Done
+if /i "%Windows%"=="S:" goto Done
+if /i "%Windows%"=="T:" goto Done
+if /i "%Windows%"=="U:" goto Done
+if /i "%Windows%"=="V:" goto Done
+if /i "%Windows%"=="W:" goto Done
+if /i "%Windows%"=="X:" goto Done
+if /i "%Windows%"=="Y:" goto Done
+if /i "%Windows%"=="Z:" goto Done
 echo Invalid Syntax!
-goto :PathWindows
+goto PathWindows
 
 :Done
 %Path% -extractdrivers %Windows%\SetupRST_extracted
-if errorlevel 1 goto :PathWindows
+if errorlevel 1 goto PathWindows
 move %Path% %Windows%
 endlocal
 echo.

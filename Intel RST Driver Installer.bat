@@ -17,7 +17,7 @@ goto Start
 :Driver1
 echo.
 echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
-echo Press any key to  open the website.
+echo Press any key to open the website.
 pause >nul
 start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 goto PathWindows
@@ -25,7 +25,7 @@ goto PathWindows
 :Driver2
 echo.
 echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
-echo Press any key to  open the website.
+echo Press any key to open the website.
 pause >nul
 start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
 goto PathWindows

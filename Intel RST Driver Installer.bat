@@ -1,7 +1,7 @@
 @echo off
 title Intel RST Driver Installer
 setlocal
-echo Intel RST Driver Installer v1.0.4
+echo Intel RST Driver Installer v1.0.5
 goto Start
 
 :Start
@@ -19,7 +19,7 @@ goto Start
 echo.
 echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 echo Press any key to open the website.
-pause >nul
+pause > nul
 start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 goto FullPath
 
@@ -77,7 +77,7 @@ goto Windows
 
 :Done
 "%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
-if errorlevel 1 goto FullPath
+if not errorlevel 0 goto FullPath
 move "%FullPath%" "%Windows%"
 endlocal
 echo.

@@ -1,7 +1,7 @@
 @echo off
 title Intel RST Driver Installer
 setlocal
-echo Intel RST Driver Installer v1.0.1
+echo Intel RST Driver Installer v1.0.2
 echo.
 echo Please run this batch file as an administrator.
 
@@ -22,7 +22,7 @@ echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/w
 echo Press any key to open the website.
 pause >nul
 start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
-goto PathWindows
+goto FullPath
 
 :Driver2
 echo.
@@ -30,12 +30,20 @@ echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/w
 echo Press any key to open the website.
 pause >nul
 start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
-goto PathWindows
+goto FullPath
 
-:PathWindows
+:FullPath
 echo.
 set FullPath=
 set /p FullPath="What is the full path to your downloaded Intel RST driver? "
+if not exist "%FullPath%" goto FullPathNotExist
+goto Windows
+
+:FullPathNotExist
+echo "%FullPath%" does not exist!
+goto FullPath
+
+:Windows
 echo.
 set Windows=
 set /p Windows="What is the drive letter of your Windows installation media? (A:-Z:) "
@@ -66,11 +74,11 @@ if /i "%Windows%"=="X:" goto Done
 if /i "%Windows%"=="Y:" goto Done
 if /i "%Windows%"=="Z:" goto Done
 echo Invalid Syntax!
-goto PathWindows
+goto Windows
 
 :Done
-"%Path%" -extractdrivers "%Windows%\SetupRST_extracted"
-if errorlevel 1 goto PathWindows
+"%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
+if errorlevel 1 goto FullPath
 move "%FullPath%" "%Windows%"
 endlocal
 echo.

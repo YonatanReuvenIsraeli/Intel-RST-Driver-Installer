@@ -1,9 +1,8 @@
 @echo off
 title Intel RST Driver Installer
 setlocal
-echo Intel RST Driver Installer v1.0.3
-echo.
-echo Please run this batch file as an administrator.
+echo Intel RST Driver Installer v1.0.4
+goto Start
 
 :Start
 echo.

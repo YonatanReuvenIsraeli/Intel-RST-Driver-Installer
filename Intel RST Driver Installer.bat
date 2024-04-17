@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.1.0
+echo Version: 1.1.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -82,9 +82,9 @@ goto Windows
 :Done
 "%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
 if not errorlevel 0 goto FullPath
-move "%FullPath%" "%Windows%"
+move "%FullPath%" "%Windows%" > nul 2>&1
 endlocal
 echo.
 echo Your Windows installation media now has the Intel RST driver. You can now load the Intel RST driver (it's in "%Windows%\SetupRST_extracted") from within the Windows setup. Once the system boots into the OS, run the SetupRST.exe file (it's in %Windows%\SetupRST.exe). This will install the Windows driver and give the opportunity to download the Intel Optane Memory and Storage Management application from the Microsoft Store for management of RAID/Intel Optane memory volumes. Press any key to close this batch file.
-pause >nul 2>&1
+pause > nul 2>&1
 exit

@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.1.2
+echo Version: 1.2.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -21,18 +21,24 @@ goto Start
 
 :Driver1
 echo.
-echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
 echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
+echo.
+echo Press any key to continue once you have downloaded the Intel RST driver.
+pause > nul 2>&1
 goto FullPath
 
 :Driver2
 echo.
-echo Download Intel RST Driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
 echo Press any key to open the website.
-pause >nul 2>&1
+pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
+echo.
+echo Press any key to continue once you have downloaded the Intel RST driver.
+pause > nul 2>&1
 goto FullPath
 
 :FullPath
@@ -81,10 +87,15 @@ goto Windows
 
 :Done
 "%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
-if not errorlevel 0 goto FullPath
+if not errorlevel 0 goto Error
 move "%FullPath%" "%Windows%" > nul 2>&1
 echo.
 echo Your Windows installation media now has the Intel RST driver. You can now load the Intel RST driver (it's in "%Windows%\SetupRST_extracted") from within the Windows setup. Once the system boots into the OS, run the SetupRST.exe file (it's in %Windows%\SetupRST.exe). This will install the Windows driver and give the opportunity to download the Intel Optane Memory and Storage Management application from the Microsoft Store for management of RAID/Intel Optane memory volumes. Press any key to close this batch file.
 endlocal
 pause > nul 2>&1
 exit
+
+:Error
+echo.
+echo There has been an error! You can try again.
+goto FullPath

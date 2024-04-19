@@ -10,8 +10,8 @@ goto Start
 
 :Start
 echo.
-echo [1] RAID or Intel Optane Memory H Series
-echo [2] Intel Optane Memory M Series
+echo [1] Download RAID or Intel Optane Memory H Series
+echo [2] Download Intel Optane Memory M Series
 echo [3] Already have downloaded the Intel RST driver.
 set Driver=
 set /p Driver="Which of the following do you need? (1-3) "

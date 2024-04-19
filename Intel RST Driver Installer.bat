@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.3.2
+echo Version: 1.3.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -10,11 +10,11 @@ goto Start
 
 :Start
 echo.
-echo [1] Download RAID or Intel Optane Memory H Series
-echo [2] Download Intel Optane Memory M Series
+echo [1] Download RAID or Intel Optane Memory H Series.
+echo [2] Download Intel Optane Memory M Series.
 echo [3] Already have downloaded the Intel RST driver.
 set Driver=
-set /p Driver="Which of the following do you need? (1-3) "
+set /p Driver="What do you want to do? (1-3) "
 if "%Driver%"=="1" goto Driver1
 if "%Driver%"=="2" goto Driver2
 if "%Driver%"=="3" goto FullPath

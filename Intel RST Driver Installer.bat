@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.3.4
+echo Version: 1.3.5
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -18,7 +18,7 @@ set /p Driver="What do you want to do? (1-3) "
 if /i "%Driver%"=="1" goto Driver1
 if /i "%Driver%"=="2" goto Driver2
 if /i "%Driver%"=="3" goto FullPath
-echo Invalid Syntax!
+echo Invalid syntax!
 goto Start
 
 :Driver1
@@ -84,7 +84,7 @@ if /i "%Windows%"=="W:" goto Done
 if /i "%Windows%"=="X:" goto Done
 if /i "%Windows%"=="Y:" goto Done
 if /i "%Windows%"=="Z:" goto Done
-echo Invalid Syntax!
+echo Invalid syntax!
 goto Windows
 
 :Done

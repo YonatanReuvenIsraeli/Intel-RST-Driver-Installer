@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.0
+echo Version: 1.4.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -51,7 +51,7 @@ if not exist "%FullPath%" goto FullPathNotExist
 goto Windows
 
 :FullPathNotExist
-echo "%FullPath%" does not exist!
+echo "%FullPath%" does not exist! Please try again.
 goto FullPath
 
 :Windows

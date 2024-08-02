@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.3.5
+echo Version: 1.4.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -58,36 +58,55 @@ goto FullPath
 echo.
 set Windows=
 set /p Windows="What is the drive letter of your Windows installation media? (A:-Z:) "
-if /i "%Windows%"=="A:" goto Done
-if /i "%Windows%"=="B:" goto Done
-if /i "%Windows%"=="C:" goto Done
-if /i "%Windows%"=="D:" goto Done
-if /i "%Windows%"=="E:" goto Done
-if /i "%Windows%"=="F:" goto Done
-if /i "%Windows%"=="G:" goto Done
-if /i "%Windows%"=="H:" goto Done
-if /i "%Windows%"=="I:" goto Done
-if /i "%Windows%"=="J:" goto Done
-if /i "%Windows%"=="K:" goto Done
-if /i "%Windows%"=="L:" goto Done
-if /i "%Windows%"=="M:" goto Done
-if /i "%Windows%"=="N:" goto Done
-if /i "%Windows%"=="O:" goto Done
-if /i "%Windows%"=="P:" goto Done
-if /i "%Windows%"=="Q:" goto Done
-if /i "%Windows%"=="R:" goto Done
-if /i "%Windows%"=="S:" goto Done
-if /i "%Windows%"=="T:" goto Done
-if /i "%Windows%"=="U:" goto Done
-if /i "%Windows%"=="V:" goto Done
-if /i "%Windows%"=="W:" goto Done
-if /i "%Windows%"=="X:" goto Done
-if /i "%Windows%"=="Y:" goto Done
-if /i "%Windows%"=="Z:" goto Done
+if /i "%Windows%"=="A:" goto SureWindows
+if /i "%Windows%"=="B:" goto SureWindows
+if /i "%Windows%"=="C:" goto SureWindows
+if /i "%Windows%"=="D:" goto SureWindows
+if /i "%Windows%"=="E:" goto SureWindows
+if /i "%Windows%"=="F:" goto SureWindows
+if /i "%Windows%"=="G:" goto SureWindows
+if /i "%Windows%"=="H:" goto SureWindows
+if /i "%Windows%"=="I:" goto SureWindows
+if /i "%Windows%"=="J:" goto SureWindows
+if /i "%Windows%"=="K:" goto SureWindows
+if /i "%Windows%"=="L:" goto SureWindows
+if /i "%Windows%"=="M:" goto SureWindows
+if /i "%Windows%"=="N:" goto SureWindows
+if /i "%Windows%"=="O:" goto SureWindows
+if /i "%Windows%"=="P:" goto SureWindows
+if /i "%Windows%"=="Q:" goto SureWindows
+if /i "%Windows%"=="R:" goto SureWindows
+if /i "%Windows%"=="S:" goto SureWindows
+if /i "%Windows%"=="T:" goto SureWindows
+if /i "%Windows%"=="U:" goto SureWindows
+if /i "%Windows%"=="V:" goto SureWindows
+if /i "%Windows%"=="W:" goto SureWindows
+if /i "%Windows%"=="X:" goto SureWindows
+if /i "%Windows%"=="Y:" goto SureWindows
+if /i "%Windows%"=="Z:" goto SureWindows
 echo Invalid syntax!
 goto Windows
 
+:SureWindows
+echo.
+set SureWindows=
+set /p SureWindows="Are you sure "%Windows%" is the drive letter of your Windows installation media? (Yes/No) "
+if /i "%SureWindows%"=="Yes" goto CheckExistWindows
+if /i "%SureWindows%"=="No" goto Windows
+echo Invalid syntax!
+goto SureWindows
+
+:CheckExistWindows
+if not exist "%Windows%" goto NotExist
+goto Done
+
+:NotExist
+echo "%Windows%" does not exist. Please try again.
+goto Windows
+
 :Done
+echo.
+echo Installing Intel RST driver.
 "%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
 if not errorlevel 0 goto Error
 move "%FullPath%" "%Windows%" > nul 2>&1

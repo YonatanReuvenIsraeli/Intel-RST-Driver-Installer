@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.5
+echo Version: 1.4.6
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -48,12 +48,12 @@ goto "FullPath"
 echo.
 set FullPath=
 set /p FullPath="What is the full path to your downloaded Intel RST driver? "
-if not exist "%FullPath%" goto FullPathNotExist
+if not exist "%FullPath%" goto "FullPathNotExist"
 goto "Windows"
 
 :"FullPathNotExist"
 echo "%FullPath%" does not exist! Please try again.
-goto FullPath
+goto "FullPath"
 
 :"Windows"
 echo.

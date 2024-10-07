@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.7
+echo Version: 1.4.8
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -18,7 +18,7 @@ set Driver=
 set /p Driver="What do you want to do? (1-3) "
 if /i "%Driver%"=="1" goto "Driver1"
 if /i "%Driver%"=="2" goto "Driver2"
-if /i "%Driver%"=="3" goto "FullPath"
+if /i "%Driver%"=="3" goto "RSTPath"
 echo Invalid syntax!
 goto "Start"
 
@@ -31,7 +31,7 @@ start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storag
 echo.
 echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
-goto "FullPath"
+goto "RSTPath"
 
 :"Driver2"
 echo.
@@ -42,18 +42,18 @@ start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage
 echo.
 echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
-goto "FullPath"
+goto "RSTPath"
 
-:"FullPath"
+:"RSTPath"
 echo.
-set FullPath=
-set /p FullPath="What is the full path to your downloaded Intel RST driver? "
-if not exist "%FullPath%" goto "FullPathNotExist"
+set RSTPath=
+set /p RSTPath="What is the path to the folder your downloaded Intel RST driver (SetupRST.exe) is in? "
+if not exist "%RSTPath%\SetupRST.exe" goto "RSTPathNotExist"
 goto "Windows"
 
-:"FullPathNotExist"
-echo "%FullPath%" does not exist! Please try again.
-goto "FullPath"
+:"RSTPathNotExist"
+echo "%RSTPath%\SetupRST.exe" does not exist! Please try again.
+goto "RSTPath"
 
 :"Windows"
 echo.
@@ -108,9 +108,9 @@ goto "Windows"
 :"Done"
 echo.
 echo Installing Intel RST driver.
-"%FullPath%" -extractdrivers "%Windows%\SetupRST_extracted"
+"%RSTPath%\SetupRST.exe" -extractdrivers "%Windows%\SetupRST_extracted"
 if not errorlevel 0 goto Error
-move "%FullPath%" "%Windows%" > nul 2>&1
+move "%RSTPath%\SetupRST.exe" "%Windows%" > nul 2>&1
 if not errorlevel 0 goto Error
 endlocal
 echo.
@@ -120,4 +120,4 @@ exit
 
 :"Error"
 echo There has been an error! You can try again.
-goto "FullPath"
+goto "RSTPath"

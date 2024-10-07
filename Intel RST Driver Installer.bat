@@ -47,7 +47,7 @@ goto "RSTPath"
 :"RSTPath"
 echo.
 set RSTPath=
-set /p RSTPath="What is the path to the folder your downloaded Intel RST driver (SetupRST.exe) is in? "
+set /p RSTPath="What is the path to the folder your downloaded Intel RST driver ("SetupRST.exe") is in? "
 if not exist "%RSTPath%\SetupRST.exe" goto "RSTPathNotExist"
 goto "Windows"
 

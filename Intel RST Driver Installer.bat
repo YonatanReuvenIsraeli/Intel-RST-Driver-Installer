@@ -2,11 +2,20 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.14
+echo Version: 1.4.15
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
+net user > nul 2>&1
+if not "%errorlevel%"=="0" goto "InWindowsRecoveryEnvironment"
 goto "Start"
+
+:"InWindowsRecoveryEnvironment"
+echo.
+echo Please run this batch file from within Windows. Press any key to close this batch file.
+endlocal
+pause > nul 2>&1
+exit
 
 :"Start"
 echo.

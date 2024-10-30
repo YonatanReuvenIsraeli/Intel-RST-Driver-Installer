@@ -1,4 +1,4 @@
-# Intel RST Driver Installer v1.4.15
+# Intel RST Driver Installer v1.4.16
 Adds the Intel RST driver to your Windows installation media.
 
 ## Uses

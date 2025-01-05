@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.19
+echo Version: 1.4.20
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -134,6 +134,7 @@ echo Your Windows installation media now has the Intel RST driver. You can now l
 endlocal
 pause > nul 2>&1
 exit
+
 :"Error"
 echo There has been an error! You can try again.
 goto "RSTPath"

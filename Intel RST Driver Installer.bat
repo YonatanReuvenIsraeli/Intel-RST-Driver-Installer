@@ -2,19 +2,18 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.21
+echo Version: 1.4.22
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
 echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
 "%windir%\System32\net.exe" user > nul 2>&1
-if not "%errorlevel%"=="0" goto "InWindowsRecoveryEnvironment"
+if not "%errorlevel%"=="0" goto "InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 goto "Start"
 
-:"InWindowsRecoveryEnvironment"
+:"InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 echo.
-echo Please run this batch file from within Windows. Press any key to close this batch file.
-endlocal
+echo echo You are in Windows Preinstallation Environment or Windows Recovery Environment! You must run this batch file in Windows. Press any key to close this batch file.
 pause > nul 2>&1
 exit
 

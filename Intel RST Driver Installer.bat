@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.22
+echo Version: 1.4.23
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -67,7 +67,7 @@ goto "RSTPath"
 :"Windows"
 echo.
 set Windows=
-set /p Windows="What is the drive letter of your Windows installation media? (A:-Z:) "
+set /p Windows="What is the drive letter of your Windows Disk Image/Windows installation media? (A:-Z:) "
 if /i "%Windows%"=="A:" goto "SureWindows"
 if /i "%Windows%"=="B:" goto "SureWindows"
 if /i "%Windows%"=="C:" goto "SureWindows"
@@ -100,7 +100,7 @@ goto "Windows"
 :"SureWindows"
 echo.
 set SureWindows=
-set /p SureWindows="Are you sure "%Windows%" is the drive letter of your Windows installation media? (Yes/No) "
+set /p SureWindows="Are you sure "%Windows%" is the drive letter of your Windows Disk Image/Windows installation media? (Yes/No) "
 if /i "%SureWindows%"=="Yes" goto "CheckExistWindows"
 if /i "%SureWindows%"=="No" goto "Windows"
 echo Invalid syntax!
@@ -108,17 +108,17 @@ goto "SureWindows"
 
 :"CheckExistWindows"
 if not exist "%Windows%" goto NotExist
-goto "CheckIfWindowsInstallationMedia"
+goto "CheckIfWindowsDiskImageWindowsinstallationmedia"
 
 :"NotExist"
 echo "%Windows%" does not exist. Please try again.
 goto "Windows"
 
-:"CheckIfWindowsInstallationMedia"
+:"CheckIfWindowsDiskImageWindowsinstallationmedia"
 if exist "%Windows%\sources" goto "Done"
 if exist "%Windows%\x86\sources" goto "Done"
 if exist "%Windows%\x64\sources" goto "Done"
-echo "%Windows%" is not a Windows installation media. Please try again.
+echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please try again.
 goto "Windows"
 
 :"Done"
@@ -129,7 +129,7 @@ if not errorlevel 0 goto "Error"
 move "%RSTPath%\SetupRST.exe" "%Windows%" > nul 2>&1
 if not errorlevel 0 goto "Error"
 echo.
-echo Your Windows installation media now has the Intel RST driver. You can load the Intel RST driver (it's location is "%Windows%\SetupRST_extracted") from Windows Setup. After the system boots into Windows, run "SetupRST.exe" (it's location is "%Windows%\SetupRST.exe"). This will install the required Windows driver and provide the option to download the Intel Optane Memory and Storage Management app from the Microsoft Store. This app allows you to manage RAID and Intel Optane memory volumes. Press any key to close this batch file.
+echo Your Windows Disk Image/Windows installation media now has the Intel RST driver. You can load the Intel RST driver (it's location is "%Windows%\SetupRST_extracted") from Windows Setup. After the system boots into Windows, run "SetupRST.exe" (it's location is "%Windows%\SetupRST.exe"). This will install the required Windows driver and provide the option to download the Intel Optane Memory and Storage Management app from the Microsoft Store. This app allows you to manage RAID and Intel Optane memory volumes. Press any key to close this batch file.
 endlocal
 pause > nul 2>&1
 exit

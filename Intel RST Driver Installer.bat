@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.23
+echo Version: 1.4.24
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -58,11 +58,17 @@ echo.
 set RSTPath=
 set /p RSTPath="What is the path to the folder your downloaded Intel RST driver ("SetupRST.exe") is in? "
 if not exist "%RSTPath%\SetupRST.exe" goto "RSTPathNotExist"
-goto "Windows"
+goto "Mount"
 
 :"RSTPathNotExist"
 echo "%RSTPath%\SetupRST.exe" does not exist! Please try again.
 goto "RSTPath"
+
+:"Mount"
+echo.
+echo Please mount your Windows Disk Image/Windows installation media then press any key to continue.
+pause > nul 2>&1
+goto "Windows"
 
 :"Windows"
 echo.

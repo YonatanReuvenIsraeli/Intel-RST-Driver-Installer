@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.4.25
+echo Version: 1.5.0
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -129,6 +129,8 @@ goto "Windows"
 
 :"Done"
 echo.
+if exist "%Windows%\SetupRST_extracted" goto "ExtractedExist"
+if exist "%Windows%\SetupRST.exe" goto "SetupRSTExist"
 echo Installing Intel RST driver.
 "%RSTPath%\SetupRST.exe" -extractdrivers "%Windows%\SetupRST_extracted"
 if not errorlevel 0 goto "Error"
@@ -140,6 +142,18 @@ endlocal
 pause > nul 2>&1
 exit
 
+:"ExtractedExist"
+echo.
+echo Please rename to something else or move to another location "%Windows%\SetupRST_extracted" in order for this batch file to proceed. "%Windows%\SetupRST_extracted" is not a system file. Press any key to continue when "%Windows%\SetupRST_extracted" is renamed to something else or moved to another location.
+goto "Done"
+
+:"SetupRSTExist"
+echo.
+echo Please rename to something else or move to another location "%Windows%\SetupRST.exe" in order for this batch file to proceed. "%Windows%\SetupRST.exe" is not a system file. Press any key to continue when "%Windows%\SetupRST.exe" is renamed to something else or moved to another location.
+goto "Done"
+
 :"Error"
+rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
+del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
 echo There has been an error! You can try again.
 goto "RSTPath"

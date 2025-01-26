@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.1
+echo Version: 1.5.2
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -128,9 +128,9 @@ echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please 
 goto "Windows"
 
 :"Done"
-echo.
 if exist "%Windows%\SetupRST_extracted" goto "ExtractedExist"
 if exist "%Windows%\SetupRST.exe" goto "SetupRSTExist"
+echo.
 echo Installing Intel RST driver.
 "%RSTPath%\SetupRST.exe" -extractdrivers "%Windows%\SetupRST_extracted"
 if not errorlevel 0 goto "Error"

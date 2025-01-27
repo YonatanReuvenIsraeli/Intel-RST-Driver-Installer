@@ -146,7 +146,7 @@ goto "Windows"
 :"CheckExist"
 if exist "%Windows%\SetupRST_extracted" goto "SetupRSTExist"
 if exist "%Windows%\SetupRST.exe" goto "SetupRSTExist"
-goto "Done"
+goto "SetupRST"
 
 :"SetupRSTExist"
 echo.

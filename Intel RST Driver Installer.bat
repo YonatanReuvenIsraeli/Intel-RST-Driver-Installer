@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.3
+echo Version: 1.5.5
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -25,11 +25,27 @@ echo [3] Already have downloaded the Intel RST driver ("SetupRST.exe").
 echo.
 set Driver=
 set /p Driver="What do you want to do? (1-3) "
+if /i "%Driver%"=="1" goto "SureDriver"
+if /i "%Driver%"=="2" goto "SureDriver"
+if /i "%Driver%"=="3" goto "SureDriver"
+echo Invalid syntax!
+goto "Start"
+
+:"SureDriver"
+echo.
+set SureDriver=
+if /i "%Driver%"=="1" set /p SureDriver="Are you sure you want to download  RAID or Intel Optane Memory H Series? (Yes/No) "
+if /i "%Driver%"=="2" set /p SureDriver="Are you sure you want to download Intel Optane Memory M Series? (Yes/No) "
+if /i "%Driver%"=="3" set /p SureDriver="Are you sure you have already have downloaded the Intel RST driver? (Yes/No) "
+if /i "%SureDriver%"=="Yes" goto "DriverGo"
+if /i "%SureDriver%"=="No" goto "Start"
+echo Invalid syntax!
+goto "SureDriver"
+
+:"DriverGo"
 if /i "%Driver%"=="1" goto "Driver1"
 if /i "%Driver%"=="2" goto "Driver2"
 if /i "%Driver%"=="3" goto "RSTPath"
-echo Invalid syntax!
-goto "Start"
 
 :"Driver1"
 echo.

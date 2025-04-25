@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.7
+echo Version: 1.5.8
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -160,7 +160,7 @@ goto "SetupRSTExist"
 :"SetupRSTDelete"
 echo.
 echo Deleting your existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe").
-del "%Windows%\SetupRST_extracted" /f /q > nul 2>&1
+rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
 del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
 echo Existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe") deleted.
 goto "SetupRST"

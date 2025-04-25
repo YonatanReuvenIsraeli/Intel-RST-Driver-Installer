@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.9
+echo Version: 1.5.10
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -177,6 +177,7 @@ goto "Done"
 :"Error"
 rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
 del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
+echo.
 echo There has been an error! You can try again.
 goto "RSTPath"
 

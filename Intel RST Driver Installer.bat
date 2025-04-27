@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.10
+echo Version: 1.5.11
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -19,40 +19,45 @@ goto "Close"
 
 :"Start"
 echo.
-echo [1] Download RAID or Intel Optane Memory H Series.
-echo [2] Download Intel Optane Memory M Series.
-echo [3] Already have downloaded the Intel RST driver ("SetupRST.exe").
+echo [1] Download Intel RST driver for 8th-9th Gen platforms.
+echo [2] Download Intel RST driver for 10th-11th Gen platforms.
+echo [3] Download Intel RST driver for 12th-13th Gen platforms.
+echo [4] Download Intel RST driver for 12th-15th Gen platforms.
+echo [5] Already have downloaded the Intel RST driver ("SetupRST.exe").
 echo.
 set Driver=
-set /p Driver="What do you want to do? (1-3) "
+set /p Driver="What do you want to do? (1-5) "
 if /i "%Driver%"=="1" goto "SureDriver"
 if /i "%Driver%"=="2" goto "SureDriver"
 if /i "%Driver%"=="3" goto "SureDriver"
+if /i "%Driver%"=="4" goto "SureDriver"
+if /i "%Driver%"=="5" goto "SureDriver"
 echo Invalid syntax!
 goto "Start"
 
 :"SureDriver"
 echo.
 set SureDriver=
-if /i "%Driver%"=="1" set /p SureDriver="Are you sure you want to download  RAID or Intel Optane Memory H Series? (Yes/No) "
-if /i "%Driver%"=="2" set /p SureDriver="Are you sure you want to download Intel Optane Memory M Series? (Yes/No) "
-if /i "%Driver%"=="3" set /p SureDriver="Are you sure you have already have downloaded the Intel RST driver? (Yes/No) "
-if /i "%SureDriver%"=="Yes" goto "DriverGo"
+if /i "%Driver%"=="1" set /p SureDriver="Are you sure you want to download Intel RST driver for 8th-9th Gen platforms? (Yes/No) "
+if /i "%Driver%"=="2" set /p SureDriver="Are you sure you want to download Intel RST driver for 10th-11th Gen platforms? (Yes/No) "
+if /i "%Driver%"=="3" set /p SureDriver="Are you sure you want to download Intel RST driver for 12th-13th Gen platforms? (Yes/No) "
+if /i "%Driver%"=="4" set /p SureDriver="Are you sure you want to download Intel RST driver for 12th-15th Gen platforms? (Yes/No) "
+if /i "%Driver%"=="5" set /p SureDriver="Are you sure you have already have downloaded the Intel RST driver? (Yes/No) "
+if /i "%SureDriver%"=="Yes" if /i "%Driver%"=="1" goto "Driver1"
+if /i "%SureDriver%"=="Yes" if /i "%Driver%"=="2" goto "Driver2"
+if /i "%SureDriver%"=="Yes" if /i "%Driver%"=="3" goto "Driver3"
+if /i "%SureDriver%"=="Yes" if /i "%Driver%"=="4" goto "Driver4"
+if /i "%SureDriver%"=="Yes" if /i "%Driver%"=="5" goto "RSTPath"
 if /i "%SureDriver%"=="No" goto "Start"
 echo Invalid syntax!
 goto "SureDriver"
 
-:"DriverGo"
-if /i "%Driver%"=="1" goto "Driver1"
-if /i "%Driver%"=="2" goto "Driver2"
-if /i "%Driver%"=="3" goto "RSTPath"
-
 :"Driver1"
 echo.
-echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-8th-and-9th-gen-platforms.html
 echo Press any key to open the website.
 pause > nul 2>&1
-start https://www.intel.com/content/www/us/en/download/720755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-11th-up-to-13th-gen-platforms.html
+start https://www.intel.com/content/www/us/en/download/19755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-8th-and-9th-gen-platforms.html
 echo.
 echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
 pause > nul 2>&1
@@ -60,10 +65,29 @@ goto "RSTPath"
 
 :"Driver2"
 echo.
-echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
-echo Press any key to open the website.
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
 pause > nul 2>&1
-start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html?v=t
+start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
+echo.
+echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+pause > nul 2>&1
+goto "RSTPath"
+
+:"Driver3"
+echo.
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/849933/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-13th-gen-platforms.html
+pause > nul 2>&1
+start https://www.intel.com/content/www/us/en/download/849933/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-13th-gen-platforms.html
+echo.
+echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+pause > nul 2>&1
+goto "RSTPath"
+
+:"Driver4"
+echo.
+echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/849936/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-15th-gen-platforms.html
+pause > nul 2>&1
+start https://www.intel.com/content/www/us/en/download/849936/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-15th-gen-platforms.html
 echo.
 echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
 pause > nul 2>&1

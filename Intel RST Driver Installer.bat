@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.5.11
+echo Version: 1.5.12
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -55,6 +55,7 @@ goto "SureDriver"
 :"Driver1"
 echo.
 echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-8th-and-9th-gen-platforms.html
+echo.
 echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/19755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-8th-and-9th-gen-platforms.html
@@ -66,6 +67,8 @@ goto "RSTPath"
 :"Driver2"
 echo.
 echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
+echo.
+echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
 echo.
@@ -76,6 +79,8 @@ goto "RSTPath"
 :"Driver3"
 echo.
 echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/849933/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-13th-gen-platforms.html
+echo.
+echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/849933/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-13th-gen-platforms.html
 echo.
@@ -86,6 +91,8 @@ goto "RSTPath"
 :"Driver4"
 echo.
 echo Download Intel RST driver from here. ^-^-^> https://www.intel.com/content/www/us/en/download/849936/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-15th-gen-platforms.html
+echo.
+echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/849936/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-15th-gen-platforms.html
 echo.

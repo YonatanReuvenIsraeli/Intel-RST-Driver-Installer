@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 1.6.2
+echo Version: 2.0.0
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -31,7 +31,7 @@ echo [1] Download Intel RST driver for 8th-9th Gen platforms.
 echo [2] Download Intel RST driver for 10th-11th Gen platforms.
 echo [3] Download Intel RST driver for 12th-13th Gen platforms.
 echo [4] Download Intel RST driver for 12th-15th Gen platforms.
-echo [5] Already have downloaded the Intel RST driver ("SetupRST.exe").
+echo [5] Already have downloaded the Intel RST driver.
 echo.
 set Driver=
 set /p Driver="What do you want to do? (1-5) "
@@ -68,7 +68,7 @@ echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/19755/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-8th-and-9th-gen-platforms.html
 echo.
-echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
 goto "RSTPath"
 
@@ -80,7 +80,7 @@ echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html
 echo.
-echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
 goto "RSTPath"
 
@@ -92,7 +92,7 @@ echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/849933/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-13th-gen-platforms.html
 echo.
-echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
 goto "RSTPath"
 
@@ -104,31 +104,31 @@ echo Press any key to open the website.
 pause > nul 2>&1
 start https://www.intel.com/content/www/us/en/download/849936/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-12th-to-15th-gen-platforms.html
 echo.
-echo Press any key to continue once you have downloaded the Intel RST driver ("SetupRST.exe").
+echo Press any key to continue once you have downloaded the Intel RST driver.
 pause > nul 2>&1
 goto "RSTPath"
 
 :"RSTPath"
 echo.
 set RSTPath=
-set /p RSTPath="What is the path to the folder your downloaded Intel RST driver ("SetupRST.exe") is in? "
+set /p RSTPath="What is the full path of your downloaded Intel RST driver? "
 goto "SureRSTPath"
 
 :"SureRSTPath"
 echo.
 set SureRSTPath=
-set /p SureRSTPath="Are you "%RSTPath%" is the path to the folder your downloaded Intel RST driver ("SetupRST.exe") is in? (Yes/No) "
+set /p SureRSTPath="Are you "%RSTPath%" is the full path of your downloaded Intel RST driver? (Yes/No) "
 if /i "%SureRSTPath%"=="Yes" goto "RSTPathCheckExist"
 if /i "%SureRSTPath%"=="No" goto "RSTPath"
 echo Invalid syntax!
 goto "SureRSTPath"
 
 :"RSTPathCheckExist"
-if not exist "%RSTPath%\SetupRST.exe" goto "RSTPathNotExist"
+if not exist "%RSTPath%" goto "RSTPathNotExist"
 goto "Mount"
 
 :"RSTPathNotExist"
-echo "%RSTPath%\SetupRST.exe" does not exist! Please try again.
+echo "%RSTPath%" does not exist! Please try again.
 goto "RSTPath"
 
 :"Mount"
@@ -188,18 +188,46 @@ echo "%Windows%" does not exist. Please try again.
 goto "Windows"
 
 :"CheckIfWindowsDiskImageWindowsinstallationmedia"
-if exist "%Windows%\sources" goto "CheckExist"
-if exist "%Windows%\x86\sources" goto "CheckExist"
-if exist "%Windows%\x64\sources" goto "CheckExist"
+if exist "%Windows%\sources" goto "Call1"
+if exist "%Windows%\x86\sources" goto "Call1"
+if exist "%Windows%\x64\sources" goto "Call1"
 echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please try again.
 goto "Windows"
 
+:"Call1"
+call :"Argument1" "%RSTPath%"
+goto "CheckExist"
+
+:"Argument1"
+set DriveLetter=%~d1
+exit /b
+
 :"CheckExist"
-if exist "%Windows%\SetupRST_extracted" goto "SetupRSTExist"
-if exist "%Windows%\SetupRST.exe" goto "SetupRSTExist"
+if exist "%Windows%\SetupRST_extracted" if not exist "%Windows%\SetupRST.exe" goto "SetupRSTExistSetupRST_extracted"
+if /i not "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if not exist "%Windows%\SetupRST_extracted" goto "SetupRSTExistSetupRST"
+if /i not "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" goto "SetupRSTExistBoth"
+if /i "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" goto "SetupRSTExistSetupRST_extracted"
 goto "SetupRST"
 
-:"SetupRSTExist"
+:"SetupRSTExistSetupRST_extracted"
+echo.
+set SureDelete=
+set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST_extracted"). Are you sure you want to continue? (Yes/No) "
+if /i "%SureDelete%"=="Yes" goto "SetupRSTDelete"
+if /i "%SureDelete%"=="No" goto "Close"
+echo Invalid syntax!
+goto "SetupRSTExist"
+
+:"SetupRSTExistSetupRST"
+echo.
+set SureDelete=
+set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
+if /i "%SureDelete%"=="Yes" goto "SetupRSTDelete"
+if /i "%SureDelete%"=="No" goto "Close"
+echo Invalid syntax!
+goto "SetupRSTExist"
+
+:"SetupRSTExistBoth"
 echo.
 set SureDelete=
 set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
@@ -212,23 +240,42 @@ goto "SetupRSTExist"
 echo.
 echo Deleting your existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe").
 rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
-del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
+if /i not "%DriveLetter%"=="%Windows%" del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
 echo Existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe") deleted.
 goto "SetupRST"
 
 :"SetupRST"
 echo.
 echo Installing Intel RST driver.
-"%RSTPath%\SetupRST.exe" -extractdrivers "%Windows%\SetupRST_extracted"
-if not "%errorlevel%"=="0" goto "Error"
-move "%RSTPath%\SetupRST.exe" "%Windows%" > nul 2>&1
-if not "%errorlevel%"=="0" goto "Error"
+"%RSTPath%" -extractdrivers "%Windows%\SetupRST_extracted" > nul 2>&1
+if not "%errorlevel%"=="0" goto "ErrorRST"
+if /i not "%DriveLetter%"=="%Windows%" move "%RSTPath%" "%Windows%" > nul 2>&1
+if /i not "%DriveLetter%"=="%Windows%" if not "%errorlevel%"=="0" goto "ErrorRST"
+if not exist "%Windows%\SetupRST.exe" goto "Call2"
+echo Intel RST driver installed.
 goto "Done"
 
-:"Error"
+:"ErrorRST"
 rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
-del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
-echo.
+if /i not "%DriveLetter%"=="%Windows%" del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
+echo There has been an error! You can try again.
+goto "RSTPath"
+
+:"Call2"
+call :"Argument2" "%RSTPath%"
+goto "Rename"
+
+:"Argument2"
+set SetupRST=%~nx1
+exit /b
+
+:"Rename"
+ren "%Windows%\%SetupRST%" "SetupRST.exe"
+if not "%errorlevel%"=="0" goto "ErrorRename"
+echo Intel RST driver installed.
+goto "Done"
+
+:"ErrorRename"
 echo There has been an error! You can try again.
 goto "RSTPath"
 

@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 2.0.0
+echo Version: 2.0.1
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -188,17 +188,17 @@ echo "%Windows%" does not exist. Please try again.
 goto "Windows"
 
 :"CheckIfWindowsDiskImageWindowsinstallationmedia"
-if exist "%Windows%\sources" goto "Call1"
-if exist "%Windows%\x86\sources" goto "Call1"
-if exist "%Windows%\x64\sources" goto "Call1"
+if exist "%Windows%\sources" goto "Call"
+if exist "%Windows%\x86\sources" goto "Call"
+if exist "%Windows%\x64\sources" goto "Call"
 echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please try again.
 goto "Windows"
 
-:"Call1"
-call :"Argument1" "%RSTPath%"
+:"Call"
+call :"Argument" "%RSTPath%"
 goto "CheckExist"
 
-:"Argument1"
+:"Argument"
 set DriveLetter=%~d1
 exit /b
 
@@ -249,33 +249,14 @@ echo.
 echo Installing Intel RST driver.
 "%RSTPath%" -extractdrivers "%Windows%\SetupRST_extracted" > nul 2>&1
 if not "%errorlevel%"=="0" goto "ErrorRST"
-if /i not "%DriveLetter%"=="%Windows%" move "%RSTPath%" "%Windows%" > nul 2>&1
-if /i not "%DriveLetter%"=="%Windows%" if not "%errorlevel%"=="0" goto "ErrorRST"
-if not exist "%Windows%\SetupRST.exe" goto "Call2"
+move "%RSTPath%" "%Windows%\SetupRST.exe" > nul 2>&1
+if not "%errorlevel%"=="0" goto "ErrorRST"
 echo Intel RST driver installed.
 goto "Done"
 
 :"ErrorRST"
 rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
 if /i not "%DriveLetter%"=="%Windows%" del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
-echo There has been an error! You can try again.
-goto "RSTPath"
-
-:"Call2"
-call :"Argument2" "%RSTPath%"
-goto "Rename"
-
-:"Argument2"
-set SetupRST=%~nx1
-exit /b
-
-:"Rename"
-ren "%Windows%\%SetupRST%" "SetupRST.exe"
-if not "%errorlevel%"=="0" goto "ErrorRename"
-echo Intel RST driver installed.
-goto "Done"
-
-:"ErrorRename"
 echo There has been an error! You can try again.
 goto "RSTPath"
 

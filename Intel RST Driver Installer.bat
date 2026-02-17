@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 2.0.3
+echo Version: 2.0.4
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -188,26 +188,18 @@ echo "%Windows%" does not exist. Please try again.
 goto "Windows"
 
 :"CheckIfWindowsDiskImageWindowsinstallationmedia"
-if exist "%Windows%\sources" goto "Call"
-if exist "%Windows%\x86\sources" goto "Call"
-if exist "%Windows%\x64\sources" goto "Call"
+if exist "%Windows%\sources" goto "CheckExist"
+if exist "%Windows%\x86\sources" goto "CheckExist"
+if exist "%Windows%\x64\sources" goto "CheckExist"
 echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please try again.
 goto "Windows"
 
-:"Call"
-call :"Argument" "%RSTPath%"
-goto "CheckExist"
-
-:"Argument"
-set DriveLetter=%~d1
-exit /b
-
 :"CheckExist"
 set SetupRST=
-if exist "%Windows%\SetupRST_extracted" if not exist "%Windows%\SetupRST.exe" set SetupRST=SetupRST_extracted
-if /i "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" set SetupRST=SetupRST_extracted
-if /i not "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if not exist "%Windows%\SetupRST_extracted" set SetupRST=SetupRST.exe
-if /i not "%DriveLetter%"=="%Windows%" if exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" set SetupRST=Both
+if not exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" set SetupRST=SetupRST_extracted
+if /i "%RSTPath%"=="%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" set SetupRST=SetupRST_extracted
+if /i not "%RSTPath%"=="%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST.exe" if not exist "%Windows%\SetupRST_extracted" set SetupRST=SetupRST.exe
+if /i not "%RSTPath%"=="%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST.exe" if exist "%Windows%\SetupRST_extracted" set SetupRST=Both
 if /i not "%SetupRST%"=="" goto "SetupRSTExist"
 goto "SetupRST"
 
@@ -215,25 +207,19 @@ goto "SetupRST"
 echo.
 set SureDelete=
 if /i "%SetupRST%"=="SetupRST_extracted" set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST_extracted"). Are you sure you want to continue? (Yes/No) "
-if /i "%SetupRST%"=="SetupRST.exe" set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
-if /i "%SetupRST%"=="Both" set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
-if /i "%SureDelete%"=="Yes" goto "SetupRSTDelete"
+if /i "%SetupRST%"=="SetupRST.exe" set /p SureDelete="Warning! This will overwrite ("%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
+if /i "%SetupRST%"=="Both" set /p SureDelete="Warning! This will delete your existing Intel RST driver ("%Windows%\SetupRST_extracted") and overwrite ("%Windows%\SetupRST.exe"). Are you sure you want to continue? (Yes/No) "
+if /i "%SureDelete%"=="Yes" if /i "%SetupRST%"=="SetupRST_extracted" goto "SetupRSTDelete"
+if /i "%SureDelete%"=="Yes" if /i "%SetupRST%"=="Both" goto "SetupRSTDelete"
 if /i "%SureDelete%"=="No" goto "Close"
 echo Invalid syntax!
 goto "SetupRSTExist"
 
 :"SetupRSTDelete"
 echo.
-if /i "%SetupRST%"=="SetupRST_extracted" echo Deleting your existing Intel RST driver ("%Windows%\SetupRST_extracted").
-if /i "%SetupRST%"=="SetupRST.exe" echo Deleting your existing Intel RST driver ("%Windows%\SetupRST.exe").
-if /i "%SetupRST%"=="Both" echo Deleting your existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe").
-if /i "%SetupRST%"=="SetupRST_extracted" rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
-if /i "%SetupRST%"=="Both" rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
-if /i "%SetupRST%"=="SetupRST.exe" del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
-if /i "%SetupRST%"=="Both" del "%Windows%\SetupRST.exe" /f /q > nul 2>&1
-if /i "%SetupRST%"=="SetupRST_extracted" echo Existing Intel RST driver ("%Windows%\SetupRST_extracted") deleted.
-if /i "%SetupRST%"=="SetupRST.exe" echo Existing Intel RST driver ("%Windows%\SetupRST.exe") deleted.
-if /i "%SetupRST%"=="Both" echo Existing Intel RST driver ("%Windows%\SetupRST_extracted" and "%Windows%\SetupRST.exe") deleted.
+echo Deleting your existing Intel RST driver ("%Windows%\SetupRST_extracted").
+rd "%Windows%\SetupRST_extracted" /s /q > nul 2>&1
+echo Existing Intel RST driver ("%Windows%\SetupRST_extracted") deleted.
 goto "SetupRST"
 
 :"SetupRST"

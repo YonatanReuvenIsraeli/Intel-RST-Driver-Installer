@@ -2,7 +2,7 @@
 title Intel RST Driver Installer
 setlocal
 echo Program Name: Intel RST Driver Installer
-echo Version: 2.0.4
+echo Version: 2.0.5
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -188,9 +188,8 @@ echo "%Windows%" does not exist. Please try again.
 goto "Windows"
 
 :"CheckIfWindowsDiskImageWindowsinstallationmedia"
-if exist "%Windows%\sources" goto "CheckExist"
-if exist "%Windows%\x86\sources" goto "CheckExist"
-if exist "%Windows%\x64\sources" goto "CheckExist"
+if exist "%DriveLetter%\sources" if not exist "%DriveLetter%\x86\sources" if not exist "%DriveLetter%\x64\sources" goto "CheckExist"
+if exist "%DriveLetter%\x86\sources" if exist "%DriveLetter%\x64\sources" if not exist "%DriveLetter%\sources" goto "CheckExist"
 echo "%Windows%" is not a Windows Disk Image/Windows installation media. Please try again.
 goto "Windows"
 
